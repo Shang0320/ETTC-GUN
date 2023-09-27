@@ -1,0 +1,133 @@
+@@ -0,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CGA射擊盃計分器</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 300px;
+            margin: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #ccc;
+        }
+        td input[type="number"] {
+            width: 40px;
+        }
+    </style>
+</head>
+<body>
+    <h1>手槍射擊計分器</h1>
+    <table>
+        <tr>
+            <th>分數</th>
+            <th>顯示次數</th>
+            <th>小計</th>
+            <th>操作</th>
+        </tr>
+        <tr>
+            <td>5分</td>
+            <td><input type="number" id="score5" value="0" readonly></td>
+            <td id="subtotal5">0</td>
+            <td>
+                <button onclick="incrementScore(5, 1)">+</button>
+                <button onclick="decrementScore(5, 1)">-</button>
+            </td>
+        </tr>
+        <tr>
+            <td>6分</td>
+            <td><input type="number" id="score6" value="0" readonly></td>
+            <td id="subtotal6">0</td>
+            <td>
+                <button onclick="incrementScore(6, 1)">+</button>
+                <button onclick="decrementScore(6, 1)">-</button>
+            </td>
+        </tr>
+        <tr>
+            <td>7分</td>
+            <td><input type="number" id="score7" value="0" readonly></td>
+            <td id="subtotal7">0</td>
+            <td>
+                <button onclick="incrementScore(7, 1)">+</button>
+                <button onclick="decrementScore(7, 1)">-</button>
+            </td>
+        </tr>
+        <tr>
+            <td>8分</td>
+            <td><input type="number" id="score8" value="0" readonly></td>
+            <td id="subtotal8">0</td>
+            <td>
+                <button onclick="incrementScore(8, 1)">+</button>
+                <button onclick="decrementScore(8, 1)">-</button>
+            </td>
+        </tr>
+        <tr>
+            <td>9分</td>
+            <td><input type="number" id="score9" value="0" readonly></td>
+            <td id="subtotal9">0</td>
+            <td>
+                <button onclick="incrementScore(9, 1)">+</button>
+                <button onclick="decrementScore(9, 1)">-</button>
+            </td>
+        </tr>
+        <tr>
+            <td>10分</td>
+            <td><input type="number" id="score10" value="0" readonly></td>
+            <td id="subtotal10">0</td>
+            <td>
+                <button onclick="incrementScore(10, 1)">+</button>
+                <button onclick="decrementScore(10, 1)">-</button>
+            </td>
+        </tr>
+    </table>
+    <h2>總計: <span id="total">0</span></h2>
+
+    <script>
+        function incrementScore(score, increment) {
+            const scoreField = document.getElementById(`score${score}`);
+            const subtotalField = document.getElementById(`subtotal${score}`);
+            const totalField = document.getElementById('total');
+
+            let currentScore = parseInt(scoreField.value);
+            currentScore += increment;
+            scoreField.value = currentScore;
+            subtotalField.textContent = currentScore * score;
+
+            // 計算總計
+            let total = 0;
+            for (let i = 5; i <= 10; i++) {
+                total += parseInt(document.getElementById(`subtotal${i}`).textContent);
+            }
+            totalField.textContent = total;
+        }
+
+        function decrementScore(score, decrement) {
+            const scoreField = document.getElementById(`score${score}`);
+            const subtotalField = document.getElementById(`subtotal${score}`);
+            const totalField = document.getElementById('total');
+
+            let currentScore = parseInt(scoreField.value);
+            if (currentScore >= decrement) {
+                currentScore -= decrement;
+                scoreField.value = currentScore;
+                subtotalField.textContent = currentScore * score;
+
+                // 計算總計
+                let total = 0;
+                for (let i = 5; i <= 10; i++) {
+                    total += parseInt(document.getElementById(`subtotal${i}`).textContent);
+                }
+                totalField.textContent = total;
+            }
+        }
+    </script>
+</body>
+</html>
